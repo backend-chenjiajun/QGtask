@@ -70,10 +70,17 @@ int main()
                {
                    printf("请输入要删除第几个结点（如果输入非数字则默认输入0）：\n");
                    n = dataScan();
+                   if (n==0)
+                   {
+                       printf("操作失败！\n");
+                       printf("请输入大于或等于1的值！\n");
+                       system("pause");
+                       break;
+                   }
                    if (DeleteList(findNode(L, n - 1), e))
                    {
                        printf("操作成功！\n");
-                       printf("所删除结点的数据为：%d", *e);
+                       printf("所删除结点的数据为：%d\n", *e);
                    }
                    else
                    {
@@ -104,9 +111,9 @@ int main()
                    printf("请输入要查询的数（如果输入非数字则默认输入0）：");
                    a = dataScan();
                    if (SearchList(L, a))
-                       printf("链表中存在该结点");
+                       printf("操作成功！\n");
                    else
-                       printf("链表中不存在该结点");
+                       printf("链表中不存在该结点\n");
                }     
                system("pause");
                break;

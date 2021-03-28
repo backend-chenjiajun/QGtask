@@ -169,16 +169,20 @@ void TraverseList(LinkedList L, void (*visit)(ElemType e)) {
  *  @notice      : None
  */
 Status SearchList(LinkedList L, ElemType e) {         
-													  
+	int  i = 1;
 	LNode* posNode = L->next; //创建指针指向头结点L的下一个结点
 	
 	while (posNode) {                //当posNode不为空时进行循环
 		
-		if (posNode->data == e) {//如果posNode中的值等于e 返回SUCCESS，表示找到结点
+		if (posNode->data == e) 
+		{//如果posNode中的值等于e 返回SUCCESS，表示找到结点
+
+			printf("该结点为第%d个结点\n",i);
 			return SUCCESS;
 		}
 		
 		posNode = posNode->next;     //posNode指向下一个结点
+		i++;
 	}
 	
 	return ERROR;                        //当posNode为空时表示未找到结点，返回ERROR

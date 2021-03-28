@@ -49,6 +49,13 @@ int main()
         case 2:
             printf("请输入在第几个结点前插入结点（如果输入非数字则默认输入0）：\n");
             n = dataScan();
+            if (n == 0)
+            {
+                printf("操作失败！\n");
+                printf("请输入大于或等于1的值！\n");
+                system("pause");
+                break;
+            }
             printf("请输入所插入结点的数据（如果输入非数字则默认输入0）：\n");
             num = dataScan();
             if (InsertBeforeList_DuL(findNode(L, n), createNode(num)))
@@ -85,6 +92,13 @@ int main()
             {
                 printf("请输入要删除第几个结点（如果输入非数字则默认输入0）：\n");
                 n = dataScan();
+                if (n == 0)
+                {
+                    printf("操作失败！\n");
+                    printf("请输入大于或等于1的值！\n");
+                    system("pause");
+                    break;
+                }
                 if (DeleteList_DuL(findNode(L, n - 1), e))
                 {
                     printf("操作成功！\n");
