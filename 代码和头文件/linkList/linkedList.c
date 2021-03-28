@@ -307,7 +307,13 @@ LNode* FindMidNode(LinkedList *L) {
 
 		while (fastNode) //当快指针不为空时
 		{
-			fastNode = fastNode->next->next;  //快指针每次后移两个结点
+			fastNode = fastNode->next;  //快指针每次后移两个结点
+			if (fastNode)
+				fastNode->next = fastNode;
+			else
+			{
+				break;
+			}
 			slowNode = slowNode->next;		//慢指针后移一个结点
 
 		}

@@ -25,7 +25,7 @@ int main()
     while (n <= 0 || n>1000)
     {
         printf("输入数据错误，请输入1-1000！\n");
-        printf("请再次输入：");
+        printf("请再次输入：\n");
         n = dataScan();
         fflush(stdin);
     }
@@ -62,35 +62,60 @@ int main()
                system("pause");
             break;
            case 3:
-               printf("请输入要删除第几个结点（如果输入非数字则默认输入0）：\n");
-               n = dataScan();
-               if (DeleteList(findNode(L, n-1), e))
+               if (L->next == NULL)
                {
-                   printf("操作成功！\n");
-                   printf("所删除结点的数据为：%d", *e);
+                   printf("链表为空，操作失败!\n");
                }
                else
                {
-                   printf("操作失败！\n");
-               }
+                   printf("请输入要删除第几个结点（如果输入非数字则默认输入0）：\n");
+                   n = dataScan();
+                   if (DeleteList(findNode(L, n - 1), e))
+                   {
+                       printf("操作成功！\n");
+                       printf("所删除结点的数据为：%d", *e);
+                   }
+                   else
+                   {
+                       printf("操作失败！\n");
+                   }
+               }  
                system("pause");
                break;
            case 4:
-               TraverseList(L, visit);
-               printf("\n");
+               if (L->next == NULL)
+               {
+                   printf("链表为空，操作失败!\n");
+               }
+               else
+               {
+                   TraverseList(L, visit);
+                   printf("\n");
+               }
                system("pause");
             break;
            case 5: 
-               printf("请输入要查询的数（如果输入非数字则默认输入0）：");
-               a = dataScan(); 
-               if (SearchList(L, a))
-                   printf("链表中存在该结点");
-               else 
-                   printf("链表中不存在该结点");
+               if (L->next == NULL)
+               {
+                   printf("链表为空，操作失败!\n");
+               }
+               else
+               {
+                   printf("请输入要查询的数（如果输入非数字则默认输入0）：");
+                   a = dataScan();
+                   if (SearchList(L, a))
+                       printf("链表中存在该结点");
+                   else
+                       printf("链表中不存在该结点");
+               }     
                system("pause");
                break;
            case 6:
-               if (ReverseList(&L)) 
+               if (L->next == NULL)
+               {
+                   printf("链表为空，操作失败!\n");
+               }
+               else if (ReverseList(&L)) 
                {
                    printf("链表反转成功\n");  
                }
@@ -102,7 +127,11 @@ int main()
                system("pause");
             break;
            case 7:
-               if (IsLoopList(L))
+               if (L->next == NULL)
+               {
+                   printf("链表为空，操作失败!\n");
+               }
+               else if (IsLoopList(L))
                {
                    printf("操作成功！\n");
                }
@@ -113,14 +142,28 @@ int main()
                system("pause");
                break;
            case 8:
-               L = ReverseEvenList(&L);
-               printf("操作成功\n");
+               if (L ->next== NULL) 
+               {
+                   printf("链表为空，操作失败!\n");
+               }
+               else
+               {
+                   L = ReverseEvenList(&L);
+                   printf("操作成功\n");
+               }
                system("pause");
                break;
            case 9:
-               mid = FindMidNode(&L);
-               printf("中间结点的数据是：%d\n", mid->data);
-               printf("操作成功\n");
+               if (L ->next== NULL)
+               {
+                   printf("链表为空，操作失败!\n");
+               }
+               else
+               {
+                   mid = FindMidNode(&L);
+                   printf("中间结点的数据是：%d\n", mid->data);
+                   printf("操作成功\n");
+               }
                system("pause");
                break;
            default:
@@ -262,6 +305,7 @@ LNode* findNode(LinkedList L, int n)
 int dataScan()
 {
     int i = 0;
+    int t = 0;
     char getdata[100];//存储输入的数据
     char ch = getchar();
     fflush(stdin);
@@ -273,5 +317,12 @@ int dataScan()
         i++;
     }
     getdata[i] = '\0';
+    for ( t = 0; t < i; t++)
+    {
+        if (getdata[t] > '9' || getdata[t] < '0')
+        {
+            return 0;
+        }
+    }
     return atoi(getdata); //将输入的非数字转为0
 }

@@ -77,22 +77,36 @@ int main()
             system("pause");
             break;
         case 4:
-            printf("请输入要删除第几个结点（如果输入非数字则默认输入0）：\n");
-            n = dataScan();
-            if (DeleteList_DuL(findNode(L, n - 1), e))
+            if (L->next == NULL)
             {
-                printf("操作成功！\n");
-                printf("所删除结点的数据为：%d", *e);
+                printf("链表为空，操作失败!\n");
             }
             else
             {
-                printf("操作失败！\n");
+                printf("请输入要删除第几个结点（如果输入非数字则默认输入0）：\n");
+                n = dataScan();
+                if (DeleteList_DuL(findNode(L, n - 1), e))
+                {
+                    printf("操作成功！\n");
+                    printf("所删除结点的数据为：%d", *e);
+                }
+                else
+                {
+                    printf("操作失败！\n");
+                }
             }
             system("pause");
             break;
         case 5:
-            TraverseList_DuL(L, visit);
-            printf("\n");
+            if (L->next == NULL)
+            {
+                printf("链表为空，操作失败!\n");
+            }
+            else
+            {
+                TraverseList_DuL(L, visit);
+                printf("\n");
+            }
             system("pause");
             break;
         default:
@@ -225,6 +239,7 @@ DuLNode* findNode(DuLinkedList L, int n)
 //输入函数
 int dataScan()
 {
+    int t = 0;
     int i = 0;
     char getdata[100];
     char ch = getchar();
@@ -237,5 +252,12 @@ int dataScan()
         i++;
     }
     getdata[i] = '\0';
+    for (t = 0; t < i; t++)
+    {
+        if (getdata[t] > '9' || getdata[t] < '0')
+        {
+            return 0;
+        }
+    }
     return atoi(getdata);
 }
