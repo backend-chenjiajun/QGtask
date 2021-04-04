@@ -1,0 +1,44 @@
+
+#ifndef STACK_H_INCLUDED
+#define STACK_H_INCLUDED
+
+typedef enum Status
+{
+	ERROR = 0,
+	SUCCESS = 1
+} Status;
+
+typedef int ElemType;
+
+typedef  struct StackNode
+{
+	ElemType data;
+	struct StackNode* next;
+}StackNode, * LinkStackPtr;
+
+typedef  struct  LinkStack
+{
+	LinkStackPtr top;
+	int	count;
+}LinkStack;
+
+
+
+//链栈
+Status initLStack(LinkStack* s);//初始化栈
+Status isEmptyLStack(LinkStack* s);//判断栈是否为空
+Status getTopLStack(LinkStack* s, ElemType* e);//得到栈顶元素
+Status clearLStack(LinkStack* s);//清空栈
+Status pushLStack(LinkStack* s, ElemType data);//入栈
+Status popLStack(LinkStack* s, ElemType* data);//出栈
+
+int Priority(char s);//判断运算符优先级
+int Precede(char op1, char op2);//比较运算符优先级
+int isOp(char ch);//判断字符是否为运算符
+Status Calculation(int* front, char op, int* after);//判断运算符并进行运算
+int dataScan(char* data); //自定义输入函数
+void view();//界面函数
+//将中缀表达式转化为后缀表达式
+void ConvertToSuffix(LinkStack* s, char* n, char* temp);
+void getValue(LinkStack* s, char* suffix);//后缀表达式求值
+#endif 
